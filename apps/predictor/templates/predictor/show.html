@@ -1,0 +1,214 @@
+{% extends 'user/base.html' %}
+{% block title %} Prediction{% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    .indentOne {
+    padding-left: 2rem;
+}
+    .indentTwo {
+        padding-left: 4rem;
+    }
+    .indentThree {
+        padding-left: 6rem;
+    }
+    .fixed {
+        position: fixed;
+    }
+    .create-form-info {
+        width: 43vw;
+    } .form-info {
+        opacity: 0.3;
+    } .right-align {
+        text-align: right;
+    } .linear-regression-model {
+        opacity: 0.85;
+    }
+    
+    .data-results {
+        position: fixed;
+        top: 12vh;
+        right: 6vw;
+        text-align: left;
+        font-family: helvetica;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 2.5rem;
+        opacity: 0.7;
+        text-align: right;
+    }
+    .results {
+        position: absolute;
+        top: -8px;
+        right: 0vw;
+        width: 40vw;
+        font-size: 1.2rem;
+        margin-bottom: 22vh
+    }
+    table {
+        width: 100%;
+    } .column, td {
+        width: 30%;
+        text-align: right;
+    } .first-column {
+        padding-right: 10px;
+    } .third-column {
+        text-align: left;
+        padding-left: 2rem;
+        width: 10%;
+    } 
+    .zoom {
+        transition: 0.5s;
+        opacity: 0.8;
+    } .zoom:hover {
+        font-size: 1.3rem;
+        opacity: 1;
+    }
+    .accuracy-info {
+        display: none;
+        opacity: 0.85;
+    }
+    .coefficient-info {
+        display: none;
+        opacity: 0.85;
+    }
+    .intercept-info {
+        display: none;
+        opacity: 0.85;
+    }
+    .navigation {
+        background: url("/images/icon2.gif");
+        position: fixed;
+        height: 100px;
+        bottom: -26px;
+        left: 7vw;
+        margin: 0 auto;
+        opacity: 0.5;
+        z-index: 2;
+        transition: .5s;
+        z-index: 3;
+    } .navigation:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transform: translate(0,-50px);
+    }
+    span.caret {
+        border-right: .05em solid;
+        animation: caret 1s steps(1) infinite;
+    }
+        @keyframes caret {
+            50% {
+                border-color: transparent;
+            }
+    }
+
+</style>
+    <div class="message2user fixed"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="create-form-info fixed">
+        <div class="form-info">
+            <p>file_name = "{{info.name}}"</p>
+            <p class="indentOne">CSV_file = "PLACEHOLDER"</p>  
+            <p class="indentOne">test_size = "{{info.size}}"</p>
+            <p class="indentOne">data_parameters = [</p>
+            <p class="indentTwo">"{{info.first}}", "{{info.second}}", "{{info.third}}"</p>
+            <p class="indentOne">]</p>
+            <p class="indentOne">separator = "{{info.separator}}"</p>
+            <br>
+        </div>
+        <br>
+        <div class="linear-regression-model">
+            <p>linear_regression_model = {</p>
+            <p class="indentOne"><span class="accuracy-toggle">"accuracy": {{data.accuracy}}</span></p>
+            <p class="indentOne"><span class="coefficient-toggle">"coefficient": {{data.coefficient}}</span></p>
+            <p class="indentOne"><span class="intercept-toggle"><span>"intercept": {{data.intercept}}</span></p>
+            <p>}</p>
+        </div>
+        <br>
+        <div class="accuracy-info">
+            <p>Accuracy is a measure of the closeness between a linear regressions computed result, and the true result given.</p>
+            <p></p>
+        </div>
+        <div class="coefficient-info">
+            <p>Coefficients are the values that multiply the predictor values. </p>
+        </div>
+        <div class="intercept-info">
+            <p>WHITNEY IS SO BEAUTIFUL</p>
+        </div>
+    </div>
+
+    <div class="data-results">
+        <p class="right-align">TEST DATA / PREDICTION / RESULT</p>
+    </div>
+
+    <div class="results">
+        <table>
+                {% for prediction in data.predictions %}
+                {% for test in data.test %}
+                {% for result in data.predicted %}
+                <tr class="zoom">
+                        <td class="first-column">{{forloop.counter}}{{test}}</td>
+                        <td>{{forloop.counter}}{{prediction}}</td>
+                        <td class="third-column"> {{forloop.counter}}{{result}}</td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+                {% endfor %}
+        </table>
+    </div>
+    <a href="{% url 'predictor:new' %}"><img class="navigation" onclick="setDisplay()" src="{% static 'predictor/images/icon2.png' %}" alt=""></a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".accuracy-toggle").hover(function(){
+        $(".accuracy-info").css("display", "inherit");
+        }, function(){
+        $(".accuracy-info").css("display", "none");
+        });
+        $(".coefficient-toggle").hover(function(){
+        $(".coefficient-info").css("display", "inherit");
+        }, function(){
+        $(".coefficient-info").css("display", "none");
+        });
+        $(".intercept-toggle").hover(function(){
+        $(".intercept-info").css("display", "inherit");
+        }, function(){
+        $(".intercept-info").css("display", "none");
+        });
+    });
+    </script>
+<script>
+        document.addEventListener('DOMContentLoaded',function(event){
+        var dataText = [ "By using science, math, and other voodoo the front end <br> designer doesn't understand, a computer is able to predict the outcome <br> based on the input parameters.", "Our AI model has a prediction rate between 80-95% <br> depending on file and sample size!", "LearnerX <br> Backend developed by: Matt Shirvan <br> Frontend developed by: Sean Cuerpo"];
+        function typeWriter(text, i, fnCallback) {
+            if (i < (text.length)) {
+            document.querySelector(".message2user").innerHTML = text.substring(0, i+1) +'<span class="caret" aria-hidden="true"></span>';
+            setTimeout(function() {
+                typeWriter(text, i + 1, fnCallback)
+            }, 100);
+        }
+        else if (typeof fnCallback == 'function') {
+        setTimeout(fnCallback, 10000);
+        }
+    }
+        function StartTextAnimation(i) {
+            if (typeof dataText[i] == 'undefined'){
+                setTimeout(function() {
+                StartTextAnimation(0);
+                }, 20000);
+            }
+            if (i < dataText[i].length) {
+            typeWriter(dataText[i], 0, function(){
+            StartTextAnimation(i + 1);
+            });
+            }
+        }
+        // start the text animation
+        StartTextAnimation(0);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,588 @@
+{% extends 'user/base.html' %}
+{% block title %} Dashboard{% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    .indentOne {
+        padding-left: 2rem;
+    }
+    .indentTwo {
+        padding-left: 4rem;
+    }
+    .indentThree {
+        padding-left: 6rem;
+    }
+    .fixed {
+        position: fixed;
+    }
+    .deViz {
+        opacity: 0.6
+    }
+    .main-info {
+        position: absolute;
+        top: 15vh;
+        height: 195vh;
+        width: 100vh;
+        z-index: 2;
+    } 
+    .navigation {
+        position: fixed;
+        height: 100px;
+        bottom: -26px;
+        left: 7vw;
+        margin: 0 auto;
+        opacity: 0.5;
+        z-index: 2;
+        transition: .5s;
+        z-index: 3;
+    } .navigation:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transform: translate(0,-50px);
+    }
+    .message2user {
+        position: fixed;
+        height: 1.4rem;
+    }
+    .background-text {
+        opacity: .4;
+        z-index: -2;
+    } .background-text:hover {
+        cursor: default;
+    }
+    a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: .5s;
+    } a:hover {
+        opacity: 1;
+    }
+    .menu {
+        display: none;
+    }
+    .url-new {
+        display: none;
+        opacity: 0.5;
+    } 
+    .url-logout {
+        display: none;
+        opacity: 0.5;
+    }
+    span.caret {
+        border-right: .05em solid;
+        animation: caret 1s steps(1) infinite;
+    }
+        @keyframes caret {
+            50% {
+                border-color: transparent;
+            }
+    }
+    .slide {
+        position: sticky;
+        height: 95vh;
+        width: 80vw;
+        overflow: hidden;
+    } .slide > h1 {
+        font-family: helvetica;
+        font-size: 7rem;
+        font-style: italic;
+        opacity: .7;
+        line-height: 1em;
+    } 
+    .machine-learning-img {
+        position: relative;
+        top: -5rem;
+        right: -10rem;
+        opacity: 0.6;
+    } .info {
+        position: relative;
+        left: 10vw;
+    } .info-scramble.is-changing {
+    animation: changing 0.5s infinite;
+    } .info-scramble-two.is-changing {
+    animation: changing 0.5s infinite;
+    } .info-scramble-three.is-changing {
+    animation: changing 0.5s infinite;
+    } 
+    .slide-one {
+        top: 10vh;
+        height: 85vh;
+    } .slide-two {
+        top: 37vh;
+        height: 62vh;
+    } .slide-three {
+        top: 53vh;
+        height: 10vh;
+        overflow: visible;
+    }
+
+@keyframes changing {
+    0% {opacity:1;}
+    50% {opacity:0.5;}
+    100% {opacity:1;}
+} 
+    .info-images {
+        position: absolute;
+    } .info-images > img {
+        opacity: .5;
+    } .image-one {
+        position: relative;
+        left: 40vw;
+        padding-bottom: 95vh;
+    } .image-two {
+        position: relative;
+        left: 20vw;
+        padding-bottom: 50vh;
+    } .image-three {
+        position: relative;
+        left: -10vw;
+    }
+
+</style>
+<body>
+    <img class="navigation" onclick="setDisplay()" src="{% static 'predictor/images/icon2.png' %}" alt="ROCKET_SHIP">
+    <div class="message2user fixed"></div>
+    <div class="main-info">
+        <div class="info-images">
+            <img class="image-one" src="{% static 'predictor/images/brain_grid.png' %}" alt="">
+            <img class="image-two" src="{% static 'predictor/images/human_grid.png' %}" alt="">
+            <img class="image-three" src="{% static 'predictor/images/shuttle_grid.png' %}" alt="">
+        </div>
+        <div class="slide slide-one">
+            <h1>WHAT IS MACHINE LEARNING?</h1>
+            <div class="info slide-one-info">
+                <p>Machine leanrning is the use of algorithms and statistics to find patterns in data.</p>
+            </div>
+        </div>
+        <div class="slide slide-two">
+            <h1>HOW IS IT APPLIED?</h1>
+            <div class="info slide-two-info">
+                <p>From Netflix to Instagram, algorithms utilize User data and browsing history to suggest television shows and movies, or advertisements and posts.</p>
+            </div>
+        </div>
+        <div class="slide slide-three">
+            <h1>WHAT IS THE FUTURE FOR AI?</h1>
+            <div class="info slide-three-info">
+                <p>Robotic bees will soon pollinate flowers around the world, and diagnosing patient illness may be removed from human error.</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="fixed background-text hide-toggle">
+        <p>import pandas as pd</p>
+        <p>import numpy as np</p>
+        <p>import sklearn</p>
+        <p>from sklearn import linear_model</p>
+        <br>
+        <p>def predictor(files, first, second, third, size, separator):</p>
+        <p class="indentOne">data = pd.read_csv(files, sep=separator)</p>
+        <p class="indentOne">data = data[["G1", "G2", "G3", first, second, third]]</p>
+        <p class="indentOne">predict = "G3"</p>
+        <p class="indentOne">x = np.array(data.drop([predict], 1))</p>
+        <p class="indentOne">x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=float(size))</p>
+        <p class="indentOne">linear = linear_model.LinearRegression()</p>
+        <p class="indentOne">linear.fit(x_train, y_train)</p>
+        <p class="indentOne">accuracy = linear.score(x_test, y_test)</p>
+        <p class="indentOne">print('Accuracy: ', accuracy)</p>
+        <p class="indentOne">print('Coefficient: \n', linear.coef_)</p>
+        <p class="indentOne">print('Intercept: \n', linear.intercept_)</p>
+        <p class="indentOne">predictions = linear.predict(x_test)</p>
+        <p class="indentOne">results = {</p>
+        <p class="indentTwo">"accuracy": accuracy, </p>
+        <p class="indentTwo">"coefficient": linear.coef_, </p>
+        <p class="indentTwo">"intercept": linear.intercept_,</p>
+        <p class="indentTwo">"predictions": predictions, </p>
+        <p class="indentTwo">"test": x_test, </p>
+        <p class="indentTwo">"predicted": y_test,</p>
+        <p class="indentOne">}</p>
+        <br>
+        <p class="indentOne">return results</p>
+    </div>
+    <div class="menu">
+        <div class="background-text">
+            <p>from django.conf.urls import url</p>
+            <p>from . import views</p>
+        </div>
+        <br>
+        <p>app_name = "navigation menu"</p>
+        <br>
+        <p>urlpatterns = [</p>
+        <a class="indentOne displayNewToggle" href="{% url 'predictor:new' %}">url(r'^new$', views.new, name="new predicion"),</a>
+        <br>
+        <a class="indentOne displayLogoutToggle" href="{% url 'user:logouts' %}">url(r'^logout$', views.show, name="logout user"),</a>
+    </div>
+    <br>
+    <div class="url-new">
+        <p>def create(request):</p>
+        <p class="indentOne">if request.method == "POST":</p>
+        <p class="indentTwo">form = LearnForm(request.POST, request.FILES)</p>
+        <br>
+        <p class="indentTwo">if form.is_valid():</p>
+        <p class="indentThree">prediction = predictor(request.FILES['file'], request.POST['first'], request.POST['second'], request.POST['third'], request.POST['size'], request.POST['separator'])</p>
+        <p class="indentThree">return show(request, prediction)</p>
+        <br>
+        <p class="indentOne">return redirect(reverse("predictor:new")) </p> 
+    </div>
+    <div class="url-logout">
+        <p>def logins(request):</p>
+        <p class="indentOne">if request.method == 'POST':</p>
+        <p class="indentTwo">username = request.POST['username']</p>
+        <p class="indentTwo">password = request.POST['password1']</p>
+        <br>
+        <p class="indentTwo">user = authenticate(request, username=username, password=password)</p>
+        <br>
+        <p class="indentTwo">if user is not None:</p>
+        <p class="indentThree">login(request, user)</p>
+        <p class="indentThree">return redirect(reverse("predictor:index"))</p>
+        <p class="indentTwo">else:</p>
+        <p class="indentThree">rmessages.info(request, "Username OR Password is incorrect")</p>
+        <p class="indentOne">return redirect(reverse("user:index"))</p>
+        <br>
+        <p>def logouts(request):</p>
+        <p class="indentOne">logout(request)</p>
+        <p class="indentOne">return redirect(reverse("user:index"))</p>
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".displayNewToggle").hover(function(){
+        $(".url-new").css("display", "inherit");
+        }, function(){
+        $(".url-new").css("display", "none");
+        });
+        $(".displayLogoutToggle").hover(function(){
+        $(".url-logout").css("display", "inherit");
+        }, function(){
+        $(".url-logout").css("display", "none");
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded',function(event){
+        var dataText = [ "With a CSV file, you can upload the data to our servers <br> and our learning algorithm will give you predictions based on computational results!", "Click on the Rocket to display navigation menu.", "LearnerX <br> Backend developed by: Matt Shirvan <br> Frontend developed by: Sean Cuerpo"];
+        function typeWriter(text, i, fnCallback) {
+            if (i < (text.length)) {
+            document.querySelector(".message2user").innerHTML = text.substring(0, i+1) +'<span class="caret" aria-hidden="true"></span>';
+            setTimeout(function() {
+                typeWriter(text, i + 1, fnCallback)
+            }, 100);
+        }
+        else if (typeof fnCallback == 'function') {
+        setTimeout(fnCallback, 10000);
+        }
+    }
+    function StartTextAnimation(i) {
+        if (typeof dataText[i] == 'undefined'){
+            setTimeout(function() {
+            StartTextAnimation(0);
+            }, 20000);
+        }
+        if (i < dataText[i].length) {
+        typeWriter(dataText[i], 0, function(){
+        StartTextAnimation(i + 1);
+                });
+            }
+        }
+        StartTextAnimation(0);
+    });
+    function setDisplay() {
+        var x = document.querySelector(".hide-toggle");
+        var y = document.querySelector("div.menu");
+        if (x.style.display === "none") {
+            x.style.display = "inherit";
+            document.querySelector(".main-info").style.display = "inherit";
+            y.style.display = "none"
+        } else {
+            x.style.display = "none";
+            document.querySelector(".main-info").style.display = "none";
+            y.style.display = "inherit"
+        }
+    }
+    var stringRandom = (function() {
+        var data = {
+            isScrolling : false,
+            repeat : 0,
+            target : [],
+            letters : '01',
+            originalStrings : '',
+            singleLetters : []
+        }
+        Array.prototype.shuffle = function() {
+            var input = this;
+            for (var i = input.length-1; i >=0; i--) {
+                var randomIndex = Math.floor(Math.random()*(i+1)); 
+                var itemAtIndex = input[randomIndex];        
+                input[randomIndex] = input[i]; 
+                input[i] = itemAtIndex;
+            }
+            return input;
+        }
+        function checkLength(x) {
+            return Array.from(document.querySelectorAll(x)).length > 0;
+        }
+        function addListener(evt, fx) {
+            window.addEventListener(evt, fx);    
+        }
+        function changeLetter(letter) {
+            if(letter.textContent != ' ') {
+                letter.classList.add('is-changing');
+                letter.style.animationDuration = Math.random().toFixed(2) + 's';      
+                var newChar = data.letters.substr( Math.random() * data.letters.length, 1);
+                letter.textContent = newChar;
+                letter.setAttribute('data-txt', newChar);
+            }
+        }
+        function resetLetter(letter, value) {
+                letter.classList.remove('is-changing');
+                letter.textContent = value;
+                letter.setAttribute('data-txt', value);
+        }
+        function divideLetters() {
+            data.target.forEach( (element, index) => {  
+                var text = element.textContent;
+                var textDivided = '';
+                data.originalStrings = text;
+                for(var i = 0; i < text.length; i++) {
+                    textDivided += `<span class="info-scramble slide-one-info-${index}-span-${i}" data-txt="${text.substr(i, 1)}">${text.substr(i, 1)}</span>`;
+                }
+                element.innerHTML = textDivided;
+            }); 
+            data.singleLetters = document.querySelectorAll('.info-scramble');
+        }
+        function changeLetters() {
+            if(data.isScrolling) {
+                data.singleLetters.forEach(function(el, index){
+                    changeLetter(el);
+                });
+            }
+            setTimeout(changeLetters, 10);
+        }
+        function resetLetters() {
+            var randomArray = [];  
+            for(var i = 0; i < data.singleLetters.length;i++) {
+                randomArray.push(i);
+            }
+            randomArray.shuffle();
+            randomArray.forEach(function(el, index){
+                setTimeout(function(){
+                    resetLetter(data.singleLetters[el], data.originalStrings.substring(el, el + 1));
+                }, (index * 20 * (Math.random() * 5))).toFixed(2);      
+            });
+        }
+        function updateScrollState() {
+            clearTimeout(delay);
+            data.isScrolling = true;
+            var delay = setTimeout(function() {
+                data.isScrolling = false;
+                resetLetters();
+            }, 100);
+        };
+        return {
+            init: function(selector){
+                if(checkLength(selector)) {
+                    data.target = Array.from(document.querySelectorAll(selector));
+                    divideLetters();
+                    changeLetters();
+                    addListener('scroll', updateScrollState);
+                }
+            }
+        }
+    })();
+    var stringRandomTwo = (function() {
+        var data = {
+            isScrolling : false,
+            repeat : 0,
+            target : [],
+            letters : '01',
+            originalStrings : '',
+            singleLetters : []
+        }
+        Array.prototype.shuffle = function() {
+            var input = this;
+            for (var i = input.length-1; i >=0; i--) {
+                var randomIndex = Math.floor(Math.random()*(i+1)); 
+                var itemAtIndex = input[randomIndex];        
+                input[randomIndex] = input[i]; 
+                input[i] = itemAtIndex;
+            }
+            return input;
+        }
+        function checkLength(x) {
+            return Array.from(document.querySelectorAll(x)).length > 0;
+        }
+        function addListener(evt, fx) {
+            window.addEventListener(evt, fx);    
+        }
+        function changeLetter(letter) {
+            if(letter.textContent != ' ') {
+                letter.classList.add('is-changing');
+                letter.style.animationDuration = Math.random().toFixed(2) + 's';      
+                var newChar = data.letters.substr( Math.random() * data.letters.length, 1);
+                letter.textContent = newChar;
+                letter.setAttribute('data-txt', newChar);
+            }
+        }
+        function resetLetter(letter, value) {
+                letter.classList.remove('is-changing');
+                letter.textContent = value;
+                letter.setAttribute('data-txt', value);
+        }
+        function divideLetters() {
+            data.target.forEach( (element, index) => {  
+                var text = element.textContent;
+                var textDivided = '';
+                data.originalStrings = text;
+                for(var i = 0; i < text.length; i++) {
+                    textDivided += `<span class="info-scramble-two slide-two-info-${index}-span-${i}" data-txt="${text.substr(i, 1)}">${text.substr(i, 1)}</span>`;
+                }
+                element.innerHTML = textDivided;
+            }); 
+            data.singleLetters = document.querySelectorAll('.info-scramble-two');
+        }
+        function changeLetters() {
+            if(data.isScrolling) {
+                data.singleLetters.forEach(function(el, index){
+                    changeLetter(el);
+                });
+            }
+            setTimeout(changeLetters, 10);
+        }
+        function resetLetters() {
+            var randomArray = [];  
+            for(var i = 0; i < data.singleLetters.length;i++) {
+                randomArray.push(i);
+            }
+            randomArray.shuffle();
+            randomArray.forEach(function(el, index){
+                setTimeout(function(){
+                    resetLetter(data.singleLetters[el], data.originalStrings.substring(el, el + 1));
+                }, (index * 20 * (Math.random() * 5))).toFixed(2);      
+            });
+        }
+        function updateScrollState() {
+            clearTimeout(delay);
+            data.isScrolling = true;
+            var delay = setTimeout(function() {
+                data.isScrolling = false;
+                resetLetters();
+            }, 100);
+        };
+        return {
+            init: function(selector){
+                if(checkLength(selector)) {
+                    data.target = Array.from(document.querySelectorAll(selector));
+                    divideLetters();
+                    changeLetters();
+                    addListener('scroll', updateScrollState);
+                }
+            }
+        }
+    })();
+    var stringRandomThree = (function() {
+        var data = {
+            isScrolling : false,
+            repeat : 0,
+            target : [],
+            letters : '01',
+            originalStrings : '',
+            singleLetters : []
+        }
+        Array.prototype.shuffle = function() {
+            var input = this;
+            for (var i = input.length-1; i >=0; i--) {
+                var randomIndex = Math.floor(Math.random()*(i+1)); 
+                var itemAtIndex = input[randomIndex];        
+                input[randomIndex] = input[i]; 
+                input[i] = itemAtIndex;
+            }
+            return input;
+        }
+        function checkLength(x) {
+            return Array.from(document.querySelectorAll(x)).length > 0;
+        }
+        function addListener(evt, fx) {
+            window.addEventListener(evt, fx);    
+        }
+        function changeLetter(letter) {
+            if(letter.textContent != ' ') {
+                letter.classList.add('is-changing');
+                letter.style.animationDuration = Math.random().toFixed(2) + 's';      
+                var newChar = data.letters.substr( Math.random() * data.letters.length, 1);
+                letter.textContent = newChar;
+                letter.setAttribute('data-txt', newChar);
+            }
+        }
+        function resetLetter(letter, value) {
+                letter.classList.remove('is-changing');
+                letter.textContent = value;
+                letter.setAttribute('data-txt', value);
+        }
+        function divideLetters() {
+            data.target.forEach( (element, index) => {  
+                var text = element.textContent;
+                var textDivided = '';
+                data.originalStrings = text;
+                for(var i = 0; i < text.length; i++) {
+                    textDivided += `<span class="info-scramble-three slide-three-info-${index}-span-${i}" data-txt="${text.substr(i, 1)}">${text.substr(i, 1)}</span>`;
+                }
+                element.innerHTML = textDivided;
+            }); 
+            data.singleLetters = document.querySelectorAll('.info-scramble-three');
+        }
+        function changeLetters() {
+            if(data.isScrolling) {
+                data.singleLetters.forEach(function(el, index){
+                    changeLetter(el);
+                });
+            }
+            setTimeout(changeLetters, 10);
+        }
+        function resetLetters() {
+            var randomArray = [];  
+            for(var i = 0; i < data.singleLetters.length;i++) {
+                randomArray.push(i);
+            }
+            randomArray.shuffle();
+            randomArray.forEach(function(el, index){
+                setTimeout(function(){
+                    resetLetter(data.singleLetters[el], data.originalStrings.substring(el, el + 1));
+                }, (index * 20 * (Math.random() * 5))).toFixed(2);      
+            });
+        }
+        function updateScrollState() {
+            clearTimeout(delay);
+            data.isScrolling = true;
+            var delay = setTimeout(function() {
+                data.isScrolling = false;
+                resetLetters();
+            }, 100);
+        };
+        return {
+            init: function(selector){
+                if(checkLength(selector)) {
+                    data.target = Array.from(document.querySelectorAll(selector));
+                    divideLetters();
+                    changeLetters();
+                    addListener('scroll', updateScrollState);
+                }
+            }
+        }
+    })();
+    stringRandom.init('.slide-one-info');
+    stringRandomTwo.init('.slide-two-info');
+    stringRandomThree.init('.slide-three-info');
+
+    window.addEventListener('scroll', function(e){
+        var scroll = window.pageYOffset;
+        const background = document.querySelector('.info-images');
+        background.style.top = - (scroll * 1.5) + 'px';
+    })
+
+
+</script>
+</body>
+{% endblock %}

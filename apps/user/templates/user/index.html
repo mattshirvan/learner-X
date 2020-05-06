@@ -1,0 +1,101 @@
+{% extends 'user/base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user/index.css' %}">
+</head>
+
+<body>
+
+    <p class="message2user"></p>
+
+    <div class="activeForm">
+        <p>class LoginForm(UserLoginForm):</p>
+        <div class="activeForm">
+            <p class="indentOne">class Meta:</p>
+            <p class="indentTwo">model = User</p>
+            <p class="indentOne">def __init__(self, *args, **kwargs):</p>
+            <p class="indentTwo">super(LoginForm, self).__init__(*args, **kwargs)</p>
+            <p class="indentTwo">self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})</p>
+            <p class="indentTwo">self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':'Password'})</p>
+            <p>
+                <form action="{% url 'user:logins' %}" method="POST">
+                    {% csrf_token %}
+                    <span class="indentTwo"><input type="submit" value="Login"> = ["{{form.username}}", "{{form.password1}}"]</span>
+                </form>
+            </p>
+        </div>
+    <br>
+        <p class="inactiveLink"><a href="{% url 'user:new' %}" class="inactiveLink">class RegisterForm(UserCreationForm):</a></p>
+        <div class="inactiveForm">
+            <p class="indentOne">first_name = forms.CharField(max_length=255)</p>
+            <p class="indentOne">last_name = forms.CharField(max_length=255)</p>
+            <p class="indentOne">email = forms.EmailField()</p>
+            <br>
+            <p class="indentOne">class Meta:</p>
+            <p class="indentTwo"><input type="submit" disabled value="Register"> = [</p>
+            <p class="indentThree">"<input type="text" placeholder="First Name" disabled id="inactiveFirstName">", </p>
+            <p class="indentThree">"<input type="text" placeholder="Last Name" disabled id="inactiveLastName">",</p>
+            <p class="indentThree">"<input type="text" placeholder="Username" disabled id="inactiveUsername">",</p>
+            <p class="indentThree">"<input type="text" placeholder="Email" disabled id="inactiveEmail">",</p>
+            <p class="indentThree">"<input type="text" placeholder="Password" disabled id="inactivePassword">",</p>
+            <p class="indentThree">"<input type="text" placeholder="Confirm" disabled id="inactivePassword2">"</p>
+            <p class="indentTwo">]</p>
+        </div>
+    <script>
+
+        var username = document.getElementById('id_username');
+        username.addEventListener('input', resizeInput);
+        var password = document.getElementById('id_password1');
+        password.addEventListener('input', resizeInput);
+        var inactiveFirstName = document.getElementById('inactiveFirstName');
+        inactiveFirstName.addEventListener('input', resizeInput);
+        var inactiveLastName = document.getElementById('inactiveLastName');
+        inactiveLastName.addEventListener('input', resizeInput);
+        var inactiveUsername = document.getElementById('inactiveUsername');
+        inactiveUsername.addEventListener('input', resizeInput);
+        var inactivePassword = document.getElementById('inactivePassword');
+        inactivePassword.addEventListener('input', resizeInput);
+        var inactivePassword2 = document.getElementById('inactivePassword2');
+        inactivePassword2.addEventListener('input', resizeInput);
+
+        function resizeInput() {
+            this.style.width = this.value.length + 1 + "ch";
+            if (this.value.length == 0) {
+                this.style.width = 8 + "ch";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded',function(event){
+            var dataText = [ "Welcome to LearnerX!", "A simple machine learning application.", "Login or Create an Account to continue!"];
+            function typeWriter(text, i, fnCallback) {
+                if (i < (text.length)) {
+                document.querySelector(".message2user").innerHTML = text.substring(0, i+1) +'<span class="caret" aria-hidden="true"></span>';
+                setTimeout(function() {
+                    typeWriter(text, i + 1, fnCallback)
+                }, 100);
+                }
+                else if (typeof fnCallback == 'function') {
+                setTimeout(fnCallback, 10000);
+                }
+            }
+            function StartTextAnimation(i) {
+                if (typeof dataText[i] == 'undefined'){
+                    setTimeout(function() {
+                    StartTextAnimation(0);
+                    }, 20000);
+                }
+                if (i < dataText[i].length) {
+                typeWriter(dataText[i], 0, function(){
+                StartTextAnimation(i + 1);
+                });
+                }
+            }
+            // start the text animation
+            StartTextAnimation(0);
+        });
+    </script>
+</body>
+{% endblock %}

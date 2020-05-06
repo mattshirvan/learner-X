@@ -1,0 +1,110 @@
+{% extends 'user/base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user/new.css' %}">
+</head>
+
+<body>
+    <p class="message2user"></p>
+
+    <p class="inactiveLink"><a href="{% url 'user:logins' %}" class="inactiveLink">class LoginForm(UserLoginForm):</a></p>
+    <div class="inactiveForm">
+        <p class="indentOne">class Meta:</p>
+        <p class="indentTwo">model = User</p>
+        <p class="indentOne">def __init__(self, *args, **kwargs):</p>
+        <p class="indentTwo">super(LoginForm, self).__init__(*args, **kwargs)</p>
+        <p class="indentTwo">self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})</p>
+        <p class="indentTwo">self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':'Password'})</p>
+        <p>
+            <form action="{% url 'user:logins' %}" method="POST">
+                <span class="indentTwo"><input type="submit" disabled value="Login"> = ["<input type="text" placeholder="Username" disabled id="inactiveUsername">", "<input type="text" placeholder="Password" disabled id="inactivePassword">"]</span>
+            </form>
+        </p>
+    </div>
+    <br>
+    <p class="activeForm">class RegisterForm(UserCreationForm):</p>
+    <div class="activeForm">
+        <p class="indentOne">first_name = forms.CharField(max_length=255)</p>
+        <p class="indentOne">last_name = forms.CharField(max_length=255)</p>
+        <p class="indentOne">email = forms.EmailField()</p>
+        <br>
+        <p class="indentOne">class Meta:</p>
+        <form action="{% url 'user:create' %}" method="POST">
+            {% csrf_token %}
+            <p class="indentTwo"><input type="submit" value="Register"> = [</p>
+            <p class="indentThree">"{{form.first_name}}", </p>
+            <p class="indentThree">"{{form.last_name}}",</p>
+            <p class="indentThree">"{{form.username}}",</p>
+            <p class="indentThree">"{{form.email}}",</p>
+            <p class="indentThree">"{{form.password1}}",</p>
+            <p class="indentThree">"{{form.password2}}"</p>
+        </form>
+        <p class="indentTwo">]</p>
+    </div>
+    <div class="messages">
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+    <script>
+        var inactiveUsername = document.getElementById('inactiveUsername');
+        inactiveUsername.addEventListener('input', resizeInput);
+        var inactivePassword = document.getElementById('inactivePassword');
+        inactivePassword.addEventListener('input', resizeInput);
+        var id_first_name = document.getElementById('id_first_name');
+        id_first_name.addEventListener('input', resizeInput);
+        var id_last_name = document.getElementById('id_last_name');
+        id_last_name.addEventListener('input', resizeInput);
+        var id_username = document.getElementById('id_username');
+        id_username.addEventListener('input', resizeInput);
+        var id_email = document.getElementById('id_email');
+        id_email.addEventListener('input', resizeInput);
+        var id_password1 = document.getElementById('id_password1');
+        id_password1.addEventListener('input', resizeInput);
+        var id_password2 = document.getElementById('id_password2');
+        id_password2.addEventListener('input', resizeInput);
+
+        function resizeInput() {
+            this.style.width = this.value.length + 1 + "ch";
+        }
+        document.addEventListener('DOMContentLoaded',function(event){
+            var dataText = [ "Create an Account to Continue!", "Password must be at least 8 character in length, and contain one number.", "Or you may Login with an existing username!"];
+            function typeWriter(text, i, fnCallback) {
+                if (i < (text.length)) {
+                document.querySelector(".message2user").innerHTML = text.substring(0, i+1) +'<span class="caret" aria-hidden="true"></span>';
+                setTimeout(function() {
+                    typeWriter(text, i + 1, fnCallback)
+                }, 100);
+                }
+                else if (typeof fnCallback == 'function') {
+                setTimeout(fnCallback, 10000);
+                }
+            }
+            function StartTextAnimation(i) {
+                if (typeof dataText[i] == 'undefined'){
+                    setTimeout(function() {
+                    StartTextAnimation(0);
+                    }, 20000);
+                }
+                if (i < dataText[i].length) {
+                typeWriter(dataText[i], 0, function(){
+                StartTextAnimation(i + 1);
+                });
+                }
+            }
+            // start the text animation
+            StartTextAnimation(0);
+        });
+    </script>
+</body>
+{% endblock %}
