@@ -1,0 +1,93 @@
+.indentOne {
+    padding-left: 2rem;
+}
+.indentTwo {
+    padding-left: 4rem;
+}
+.indentThree {
+    padding-left: 6rem;
+}
+.activeForm, .inactiveForm {
+    color: white;
+    font-style: normal;
+    font-weight: 100;
+    overflow: scroll;
+}
+input[type=submit], input[type=text], input[type=password], input[type=email] {
+    font-family: 'ubuntu mono', monospace;
+}
+input[type=submit] {
+    background: none;
+    border: 1px solid white;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: left;
+    padding: 3px 7px;
+    transition: .5s;
+} input[type=submit]:hover {
+    cursor: pointer;
+    background: white;
+    color: blue;
+    opacity: 0.8;
+}
+input[type=text], input[type=password], input[type=email] {
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    text-align: center;
+    font-size: inherit;
+    color: transparent;
+    text-shadow: 0 0 0 #fff;
+    width: 8ch;
+}
+input[type=text], input[type=password]:focus, input[type=email]:focus {
+    outline: none;
+}
+input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder {
+    color: white;
+    font-weight: 100;
+}
+.inactiveForm {
+    opacity: 0.3;
+} .inactiveForm:hover {
+    cursor: default;
+}
+p > .inactiveLink {
+    color: white;
+    opacity: 0.6;
+    transition: .5s;
+    font-style: normal;
+} p > .inactiveLink:hover {
+    opacity: 1;
+}
+.inactiveSubmit {
+    background: none;
+    border: 1px solid white;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: left;
+    padding: 3px 7px;
+}
+#id_first_name {
+    width: 10ch;
+}
+#id_last_name {
+    width: 9ch;
+}
+#id_email {
+    width: 5ch;
+}
+#id_password2 {
+    width: 7ch;
+}
+span.caret {
+border-right: .05em solid;
+animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+    50% {
+        border-color: transparent;
+    }
+}
