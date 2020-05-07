@@ -1,0 +1,97 @@
+.indentOne {
+    padding-left: 2rem;
+}
+    .indentTwo {
+        padding-left: 4rem;
+    }
+    .indentThree {
+        padding-left: 6rem;
+    }
+    .fixed {
+        position: fixed;
+    }
+    .create-form-info {
+        width: 43vw;
+    } .form-info {
+        opacity: 0.3;
+    } .right-align {
+        text-align: right;
+    } .linear-regression-model {
+        opacity: 0.85;
+    }
+    
+    .data-results {
+        position: fixed;
+        top: 12vh;
+        right: 6vw;
+        text-align: left;
+        font-family: helvetica;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 2.5rem;
+        opacity: 0.7;
+        text-align: right;
+    }
+    .results {
+        position: absolute;
+        top: -8px;
+        right: 0vw;
+        width: 40vw;
+        font-size: 1.2rem;
+        margin-bottom: 22vh
+    }
+    table {
+        width: 100%;
+    } .column, td {
+        width: 30%;
+        text-align: right;
+    } .first-column {
+        padding-right: 10px;
+    } .third-column {
+        text-align: left;
+        padding-left: 2rem;
+        width: 10%;
+    } 
+    .zoom {
+        transition: 0.5s;
+        opacity: 0.8;
+    } .zoom:hover {
+        font-size: 1.3rem;
+        opacity: 1;
+    }
+    .accuracy-info {
+        display: none;
+        opacity: 0.85;
+    }
+    .coefficient-info {
+        display: none;
+        opacity: 0.85;
+    }
+    .intercept-info {
+        display: none;
+        opacity: 0.85;
+    }
+    .navigation {
+        position: fixed;
+        height: 100px;
+        bottom: -26px;
+        left: 7vw;
+        margin: 0 auto;
+        opacity: 0.5;
+        z-index: 2;
+        transition: .5s;
+        z-index: 3;
+    } .navigation:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transform: translate(0,-50px);
+    }
+    span.caret {
+        border-right: .05em solid;
+        animation: caret 1s steps(1) infinite;
+    }
+        @keyframes caret {
+            50% {
+                border-color: transparent;
+            }
+    }

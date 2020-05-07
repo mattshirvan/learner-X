@@ -1,0 +1,140 @@
+.indentOne {
+    padding-left: 2rem;
+}
+.indentTwo {
+    padding-left: 4rem;
+}
+.indentThree {
+    padding-left: 6rem;
+}
+.fixed {
+    position: fixed;
+}
+.deViz {
+    opacity: 0.6
+}
+.main-info {
+    position: absolute;
+    top: 15vh;
+    height: 195vh;
+    width: 100vh;
+    z-index: 2;
+} 
+.navigation {
+    position: fixed;
+    height: 100px;
+    bottom: -26px;
+    left: 7vw;
+    margin: 0 auto;
+    opacity: 0.5;
+    z-index: 2;
+    transition: .5s;
+    z-index: 3;
+} .navigation:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transform: translate(0,-50px);
+}
+.message2user {
+    position: fixed;
+    height: 1.4rem;
+}
+.background-text {
+    opacity: .4;
+    z-index: -2;
+} .background-text:hover {
+    cursor: default;
+}
+a {
+color: white;
+text-decoration: none;
+opacity: 0.6;
+transition: .5s;
+} a:hover {
+    opacity: 1;
+}
+.menu {
+    display: none;
+}
+.url-new {
+    display: none;
+    opacity: 0.5;
+} 
+.url-logout {
+    display: none;
+    opacity: 0.5;
+}
+span.caret {
+    border-right: .05em solid;
+    animation: caret 1s steps(1) infinite;
+}
+    @keyframes caret {
+        50% {
+            border-color: transparent;
+        }
+}
+.slide {
+    position: sticky;
+    height: 95vh;
+    width: 80vw;
+    overflow: hidden;
+} .slide > h1 {
+    font-family: helvetica;
+    font-size: 7rem;
+    font-style: italic;
+    opacity: .7;
+    line-height: 1em;
+} 
+.machine-learning-img {
+    position: relative;
+    top: -5rem;
+    right: -10rem;
+    opacity: 0.6;
+} .info {
+    position: relative;
+    left: 10vw;
+    text-shadow: 2px 2px 2px rgba(108, 122, 137, 0.6);
+} .info-scramble.is-changing {
+animation: changing 0.5s infinite;
+} .info-scramble-two.is-changing {
+animation: changing 0.5s infinite;
+} .info-scramble-three.is-changing {
+animation: changing 0.5s infinite;
+} 
+.slide-one {
+    top: 10vh;
+    height: 85vh;
+} .slide-two {
+    top: 37vh;
+    height: 62vh;
+} .slide-three {
+    top: 54vh;
+    height: 20vh;
+    overflow: visible;
+}
+@keyframes changing {
+    0% {opacity:1;}
+    50% {opacity:0.5;}
+    100% {opacity:1;}
+} 
+.info-images {
+    position: absolute;
+} .info-images > img {
+    animation: occilate 3s infinite;
+} .image-one {
+    position: relative;
+    left: 40vw;
+    padding-bottom: 95vh;
+} .image-two {
+    position: relative;
+    left: 20vw;
+    padding-bottom: 49vh;
+} .image-three {
+    position: relative;
+    left: -10vw;
+}
+@keyframes occilate {
+    0% {opacity:0.45;}
+    50% {opacity:0.7;}
+    100% {opacity:0.45;}
+}

@@ -1,0 +1,169 @@
+
+.indentOne {
+    padding-left: 2rem;
+}
+.indentTwo {
+    padding-left: 4rem;
+}
+.indentThree {
+    padding-left: 6rem;
+}
+.create-form {
+    color: white;
+    font-style: normal;
+    font-weight: 100;
+    overflow: scroll;
+}
+.fixed {
+        position: fixed;
+    }
+
+input[type=submit], input[type=text] {
+    font-family: 'ubuntu mono', monospace;
+}
+
+input[type=submit] {
+    background: none;
+    border: 1px solid white;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: left;
+    padding: 3px 7px;
+    transition: .5s;
+} input[type=submit]:hover {
+    cursor: pointer;
+    background: white;
+    color: blue;
+    opacity: 0.8;
+}
+
+#id_file {
+    display: inline;
+    color: white;
+    font-family: 'ubuntu mono', monospace;
+    padding-top: 2px;
+    overflow:visible;
+    padding-left: 20px;
+    text-align: center;
+} #id_file::-webkit-file-upload-button {
+  visibility: hidden;
+} #id_file::before {
+    content: "CSV Select";
+    font-family: 'ubuntu mono', monospace;
+    font-size: 1rem;
+    color: white;
+    position: relative;
+    right: 20px;
+    border: 1px solid white;
+    padding: 3px 7px;
+    transition: .5s;
+} #id_file:hover::before {
+    cursor: pointer;
+    background: white;
+    color: blue;
+    opacity: 0.8;
+}
+
+input[type=text] {
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    text-align: center;
+    font-size: inherit;
+    color: transparent;
+    text-shadow: 0 0 0 #fff;
+    width: 8ch;
+} #id_name {
+    border: none;
+}
+
+input[type=text], input[type=password]:focus, #id_file:focus {
+    outline: none;
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder {
+    color: white;
+    font-weight: 100;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 1px solid white;
+    font-size: 1rem;
+    font-family: 'ubuntu mono', monospace;
+    color: white;
+    background: none;
+    background-image: none;
+    padding: 3px 7px;
+    border-radius: 0;
+    transition: .5s;
+} select::-ms-expand {
+    display: none;
+} select:hover {
+    cursor: pointer;
+    background: white;
+    color: blue;
+    opacity: 0.8;
+}
+.linear-regression-model {
+        opacity: 0.3;
+        position: relative;
+        top: -4px;
+    }
+.data-results {
+        position: fixed;
+        top: 12vh;
+        right: 6vw;
+        text-align: left;
+        font-family: helvetica;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 2.5rem;
+        opacity: 0.7;
+        text-align: right;
+}
+.navigation {
+        position: fixed;
+        height: 100px;
+        bottom: -26px;
+        left: 7vw;
+        margin: 0 auto;
+        opacity: 0.5;
+        z-index: 2;
+        transition: .5s;
+        z-index: 3;
+    } .navigation:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transform: translate(0,-50px);
+    }
+#id_name {
+    width: 11ch;
+}
+#id_size {
+    width: 9ch;
+}
+#id_first {
+    width: 5ch;
+}
+#id_second {
+    width: 6ch;
+}
+#id_third {
+    width: 5ch;
+}
+span.caret {
+        border-right: .05em solid;
+        animation: caret 1s steps(1) infinite;
+    }
+        @keyframes caret {
+            50% {
+                border-color: transparent;
+            }
+    }
